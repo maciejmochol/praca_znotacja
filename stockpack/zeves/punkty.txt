@@ -1,0 +1,37 @@
+Stockpack - operacje
+
+1. Waluty
+ok- Add
+ok- Find
+ok- GetCurrencyRatio
+ok- DeleteCurrency (tylko jesli zaden stock nie uzywa)
+
+2. StockPoints
+ok - AddDaily jesli nie ma sesji to dodaje sesje
+
+ok - AddIntraday
+ok - DeletePointsForStock
+ok - GetDaily
+skip (analogiczna definicja) - GetIntra
+
+3. Alarms
+ok - Add
+ok - IsStockActive
+ok - DeleteAlarmsForStock
+
+4. Transactions
+ok - Buy
+ok - Sell
+- TransactionProfit
+- TotalProfit
+ok - DeleteTransForStock
+
+5. Stock
+
+ok - AddStock
+ok - DeleteStock (razem ze stockiem wszystkie sesje, alarmy i punkty - intra/daily,
+	czyli koniunkcja: DeletePointsForStock, DeleteAlarmsForStock, 
+	DeleteTransForStock ...) --- dodaj transakcje !!!
+6. Portfolio
+
+ok - SetPortfolioName

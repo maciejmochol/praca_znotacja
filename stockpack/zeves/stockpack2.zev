@@ -1,0 +1,103 @@
+<Z-EVES-GUI-State version="1" index="56"><textItem history="2" location="gui::39"><theorem-def location="gui::39">deklaracje<ax-part/>true</theorem-def></textItem
+><textItem history="3" location="gui::5"><zed-box location="gui::5">CHARS == <word style="roman"/>seq<word/> &Nopf;</zed-box></textItem
+><textItem history="4" location="gui::13"><zed-box location="gui::13">FLOAT == &Zopf;</zed-box></textItem
+><textItem history="5" location="gui::6"><zed-box location="gui::6">DATE == &Nopf;</zed-box></textItem
+><textItem history="6" location="gui::7"><zed-box location="gui::7">TIME == &Nopf;</zed-box></textItem
+><textItem history="7" location="gui::24"><zed-box location="gui::24">[SOURCE]</zed-box></textItem
+><textItem history="8" location="gui::1"><schema-box location="gui::1">HEADER<decl-part/> creating_date, updating_date: DATE
+host_id: &Nopf;
+sync_source: SOURCE</schema-box></textItem
+><textItem history="9" location="gui::2"><schema-box location="gui::2">SESSIONREC<decl-part/> session_date: DATE
+session_number : &Nopf;</schema-box></textItem
+><textItem history="10" location="gui::3"><zed-box location="gui::3">SESSIONS &eqhat; [sessions: <word style="roman"/>seq<word/> SESSIONREC]</zed-box></textItem
+><textItem history="11" location="gui::12"><schema-box location="gui::12">CURRENCY<decl-part/> iso_code: CHARS
+usd_ratio: FLOAT</schema-box></textItem
+><textItem history="12" location="gui::37"><axiomatic-box location="gui::37"><decl-part/>usd_currency: CURRENCY
+</axiomatic-box></textItem
+><textItem history="13" location="gui::36"><schema-box location="gui::36">CURRENCYDATA<decl-part/> currencies: &Popf; CURRENCY<ax-part/> currencies &neq; &empty;
+usd_currency &isin; currencies
+&forall;x, y: currencies &bullet; x . iso_code = y . iso_code &rArr; x = y</schema-box></textItem
+><textItem history="14" location="gui::4"><schema-box location="gui::4">STOCKREC<decl-part/> name, symbol: CHARS
+portfolio: &Nopf;
+currency: CURRENCY
+source_id: SOURCE
+mod_date: DATE
+mod_time: TIME</schema-box></textItem
+><textItem history="15" location="gui::8"><schema-box location="gui::8">STOCKS<decl-part/> CURRENCYDATA
+stock_ids: <word style="roman"/>seq<word/> STOCKREC<ax-part/> &forall;x: STOCKREC &bullet; x &isin; <word style="roman"/>ran<word/> stock_ids &rArr; x . currency &isin; currencies</schema-box></textItem
+><textItem history="16" location="gui::25"><zed-box location="gui::25">VALTYPE ::= OPEN | CLOSE | MAX | MIN | VOL</zed-box></textItem
+><textItem history="17" location="gui::27"><zed-box location="gui::27">STOCKTYPE ::= DAILY | INTRADAY</zed-box></textItem
+><textItem history="18" location="gui::9"><schema-box location="gui::9">STOCKDAILYREC<decl-part/> stock_date: DATE
+values: VALTYPE &rarr; FLOAT</schema-box></textItem
+><textItem history="19" location="gui::32"><schema-box location="gui::32">STOCKINTRAREC<decl-part/> stock_time: TIME
+values: VALTYPE &rarr; FLOAT</schema-box></textItem
+><textItem history="20" location="gui::31"><zed-box location="gui::31">STOCKDAILYPOINTS == SESSIONS &rarrb; STOCKDAILYREC</zed-box></textItem
+><textItem history="21" location="gui::33"><zed-box location="gui::33">STOCKINTRAPOINTS == SESSIONS &rarrb; &Popf; STOCKINTRAREC</zed-box></textItem
+><textItem history="22" location="gui::10"><schema-box location="gui::10">STOCKPOINTS<decl-part/> daily_points: STOCKTYPE &rarrb; STOCKDAILYPOINTS
+intra_points: STOCKTYPE &rarrb; STOCKINTRAPOINTS<ax-part/> <word style="roman"/>dom<word/> daily_points &subeq; {DAILY}
+<word style="roman"/>dom<word/> intra_points &subeq; {INTRADAY}</schema-box></textItem
+><textItem history="23" location="gui::28"><theorem-def location="gui::28">StockIsDailyOrIntraday<ax-part/>   &forall;STOCKPOINTS
+&bullet; &forall;x: <word style="roman"/>dom<word/> daily_points &cup; <word style="roman"/>dom<word/> intra_points
+&bullet; x &isin; STOCKTYPE &rArr; (x = DAILY &vee; x = INTRADAY)</theorem-def></textItem
+><textItem history="24" location="gui::34"><schema-box location="gui::34">STOCKDATA<decl-part/> STOCKS
+datas: STOCKREC &rarrb; STOCKPOINTS<ax-part/> <word style="roman"/>dom<word/> datas &subeq; <word style="roman"/>ran<word/> stock_ids</schema-box></textItem
+><textItem history="25" location="gui::19"><zed-box location="gui::19">ALARMTYPE ::= MORE | MOREEQ | EQ | LESS | LESSEQ</zed-box></textItem
+><textItem history="26" location="gui::14"><schema-box location="gui::14">ALARMREC<decl-part/> trigger_val: ALARMTYPE &cross; VALTYPE &cross; FLOAT</schema-box></textItem
+><textItem history="27" location="gui::15"><schema-box location="gui::15"> ALARMDATA<decl-part/>STOCKS
+alarms: STOCKREC &rarrb; &Popf; ALARMREC<ax-part/><word style="roman"/>dom<word/> alarms &subeq; <word style="roman"/>ran<word/> stock_ids</schema-box></textItem
+><textItem history="28" location="gui::21"><zed-box location="gui::21">TRANSTYPE ::= BUY | SELL | BUYORSELL</zed-box></textItem
+><textItem history="29" location="gui::22"><schema-box location="gui::22">TRANSACTIONREC<decl-part/> trans_date: DATE
+trans_price, trans_fee, profit, buy_price: FLOAT
+trans_amount: &Nopf;
+trans_type: TRANSTYPE</schema-box></textItem
+><textItem history="30" location="gui::23"><schema-box location="gui::23">TRANSDATA<decl-part/>STOCKS
+transactions: STOCKREC &rarrb; &Popf; TRANSACTIONREC<ax-part/><word style="roman"/>dom<word/> transactions &subeq; <word style="roman"/>ran<word/> stock_ids</schema-box></textItem
+><textItem history="31" location="gui::11"><schema-box location="gui::11">PORTFOLIOREC<decl-part/> portfolio_name: CHARS</schema-box></textItem
+><textItem history="32" location="gui::38"><zed-box location="gui::38">PORTFOLIO &eqhat; PORTFOLIOREC &wedge; STOCKDATA &wedge; ALARMDATA &wedge; TRANSDATA</zed-box></textItem
+><textItem history="33" location="gui::40"><theorem-def location="gui::40">stan_poczatkowy<ax-part/>   true</theorem-def></textItem
+><textItem history="34" location="gui::26"><axiomatic-box location="gui::26"><decl-part/>today : DATE</axiomatic-box></textItem
+><textItem history="35" location="gui::41"><zed-box location="gui::41">CurrenciesInit &eqhat; [ CURRENCYDATA' | currencies' = {usd_currency} ]</zed-box></textItem
+><textItem history="36" location="gui::42"><zed-box location="gui::42">StockDataInit &eqhat; [STOCKDATA' | stock_ids' = &lang;&rang; &wedge; datas' = &empty; ]</zed-box></textItem
+><textItem history="37" location="gui::43"><zed-box location="gui::43">AlarmDataInit &eqhat; [ ALARMDATA' | alarms' = &empty; ]</zed-box></textItem
+><textItem history="38" location="gui::44"><zed-box location="gui::44">TransDataInit &eqhat; [ TRANSDATA' | transactions' = &empty; ]</zed-box></textItem
+><textItem history="39" location="gui::45"><zed-box location="gui::45">PortfolioRecInit &eqhat; [PORTFOLIOREC' | portfolio_name' = &lang;&rang;]</zed-box></textItem
+><textItem history="40" location="gui::46"><zed-box location="gui::46">PortfolioInit &eqhat; CurrenciesInit &wedge; StockDataInit &wedge; AlarmDataInit &wedge; TransDataInit &wedge; PortfolioRecInit</zed-box></textItem
+><textItem history="41" location="gui::47"><theorem-def location="gui::47">PortfolioInitPossible<ax-part/> &exists;PORTFOLIO' &bullet; PortfolioInit</theorem-def></textItem
+><textItem history="42" location="gui::50"><theorem-def location="gui::50">CurrencyOps<ax-part/>true</theorem-def></textItem
+><textItem history="43" location="gui::51"><schema-box location="gui::51">AddCurrency<decl-part/> &Delta;PORTFOLIO
+isocode?: CHARS
+usdratio?: FLOAT<ax-part/>&not;(&exists;x : CURRENCY &bullet; x.iso_code = isocode?)
+currencies'
+  = currencies &cup; {&theta; CURRENCY[iso_code := &lang;&rang;, usd_ratio := usdratio?]}</schema-box></textItem
+><textItem history="44" location="gui::54"><schema-box location="gui::54">FindCurrency<decl-part/>  &Xi;PORTFOLIO
+isocode?: CHARS
+out!: CURRENCY<ax-part/> &exists;&sub1; x : CURRENCY &bullet; x.iso_code = isocode?
+out! = (&mu;x: CURRENCY | x . iso_code = isocode?)</schema-box></textItem
+><textItem history="45" location="gui::55"><zed-box location="gui::55">GetRatio &eqhat; [currency?: CURRENCY; ratio!: FLOAT | ratio! = currency? . usd_ratio ]</zed-box></textItem
+><textItem history="46" location="gui::53"><zed-box location="gui::53">GetCurrencyRatio &eqhat; FindCurrency &gtgt; GetRatio [ out! / currency? ] </zed-box></textItem
+><script name="CurrencyOps"></script
+><script name="x"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="test"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="StockIsDailyOrIntraday"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+><scriptItem><ztext>apply STOCKTYPE$member to predicate x &isin; STOCKTYPE</ztext><provercmd name="apply-to-predicate"><name kind="expr" ident="STOCKTYPE$member"></name><relchain><name kind="expr" ident="x"></name><name class="other" kind="expr" ident="&isin;"></name><name kind="expr" ident="STOCKTYPE"></name></relchain></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="PortfolioInitPossible"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="t"><scriptItem><ztext>prove</ztext><provercmd name="prove-by-rewrite"></provercmd></scriptItem
+></script
+><script name="deklaracje"><scriptItem><ztext>prove</ztext></scriptItem
+></script
+><script name="StockData$domainCheck"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="x2"><scriptItem><ztext>prove by reduce</ztext></scriptItem
+><scriptItem><ztext>invoke STOCKTYPE</ztext></scriptItem
+><scriptItem><ztext>apply STOCKTYPE$member to predicate x &isin; STOCKTYPE</ztext><provercmd name="apply-to-predicate"><name kind="expr" ident="STOCKTYPE$member"></name><relchain><name kind="expr" ident="x"></name><name class="other" kind="expr" ident="&isin;"></name><name kind="expr" ident="STOCKTYPE"></name></relchain></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="stan_poczatkowy"></script
+><script name="FindCurrency$domainCheck"><scriptItem number="2"><ztext>prove by reduce</ztext></scriptItem
+></script
+></Z-EVES-GUI-State>

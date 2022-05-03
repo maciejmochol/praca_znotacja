@@ -1,0 +1,247 @@
+<Z-EVES-GUI-State version="1" index="99"><textItem history="2" location="gui::39"><theorem-def location="gui::39">Deklaracje<ax-part/>true</theorem-def></textItem
+><textItem history="3" location="gui::5"><zed-box location="gui::5">CHARS == <word style="roman"/>seq<word/> &Nopf;</zed-box></textItem
+><textItem history="4" location="gui::13"><zed-box location="gui::13">FLOAT == &Zopf;</zed-box></textItem
+><textItem history="5" location="gui::6"><zed-box location="gui::6">DATE == &Nopf;</zed-box></textItem
+><textItem history="6" location="gui::7"><zed-box location="gui::7">TIME == &Nopf;</zed-box></textItem
+><textItem history="7" location="gui::26"><axiomatic-box location="gui::26"><decl-part/>today : DATE</axiomatic-box></textItem
+><textItem history="8" location="gui::89"><axiomatic-box location="gui::89"><decl-part/>now: TIME</axiomatic-box></textItem
+><textItem history="9" location="gui::24"><zed-box location="gui::24">[SOURCE]</zed-box></textItem
+><textItem history="10" location="gui::91"><axiomatic-box location="gui::91"><decl-part/> default_source : SOURCE</axiomatic-box></textItem
+><textItem history="11" location="gui::1"><schema-box location="gui::1">HEADER<decl-part/> creating_date, updating_date: DATE
+host_id: &Nopf;
+sync_source: SOURCE</schema-box></textItem
+><textItem history="12" location="gui::2"><schema-box location="gui::2">SESSIONREC<decl-part/> session_date: DATE
+session_number : &Nopf;</schema-box></textItem
+><textItem history="13" location="gui::3"><zed-box location="gui::3">SESSIONS &eqhat; [sessions: &Popf;SESSIONREC]</zed-box></textItem
+><textItem history="14" location="gui::12"><schema-box location="gui::12">CURRENCY<decl-part/> iso_code: CHARS
+usd_ratio: FLOAT</schema-box></textItem
+><textItem history="15" location="gui::37"><axiomatic-box location="gui::37"><decl-part/>usd_currency: CURRENCY
+</axiomatic-box></textItem
+><textItem history="16" location="gui::36"><schema-box location="gui::36">CURRENCYDATA<decl-part/> currencies: &Popf; CURRENCY<ax-part/> currencies &neq; &empty;
+usd_currency &isin; currencies
+&forall;x, y: currencies &bullet; x . iso_code = y . iso_code &rArr; x = y</schema-box></textItem
+><textItem history="17" location="gui::4"><schema-box location="gui::4">STOCKREC<decl-part/> name, symbol: CHARS
+currency: CURRENCY
+source_id: SOURCE
+mod_date: DATE
+mod_time: TIME</schema-box></textItem
+><textItem history="18" location="gui::8"><schema-box location="gui::8">STOCKS<decl-part/> CURRENCYDATA
+stock_ids: &Popf;STOCKREC<ax-part/> &forall;x: STOCKREC &bullet; x &isin; stock_ids &rArr; x . currency &isin; currencies</schema-box></textItem
+><textItem history="19" location="gui::25"><zed-box location="gui::25">VALTYPE ::= OPEN | CLOSE | MAX | MIN | VOL</zed-box></textItem
+><textItem history="20" location="gui::27"><zed-box location="gui::27">STOCKTYPE ::= DAILY | INTRADAY</zed-box></textItem
+><textItem history="21" location="gui::64"><zed-box location="gui::64">VALUES == VALTYPE &rarr; FLOAT</zed-box></textItem
+><textItem history="22" location="gui::31"><zed-box location="gui::31">STOCKDAILYPOINTS == SESSIONREC &rarrb; VALUES</zed-box></textItem
+><textItem history="23" location="gui::33"><zed-box location="gui::33">STOCKINTRAPOINTS == SESSIONREC &rarrb; (TIME &cross; VALUES)</zed-box></textItem
+><textItem history="24" location="gui::34"><schema-box location="gui::34">STOCKDATA<decl-part/> STOCKS
+SESSIONS
+daily_data: STOCKREC &rarrb; STOCKDAILYPOINTS
+intra_data: STOCKREC &rarrb; STOCKINTRAPOINTS<ax-part/> <word style="roman"/>dom<word/> daily_data &subeq; stock_ids
+<word style="roman"/>dom<word/> intra_data &subeq; stock_ids
+&forall;x: <word style="roman"/>ran<word/> daily_data &bullet; <word style="roman"/>dom<word/> x &subeq; sessions
+&forall;x: <word style="roman"/>ran<word/> intra_data &bullet; <word style="roman"/>dom<word/> x &subeq; sessions</schema-box></textItem
+><textItem history="25" location="gui::19"><zed-box location="gui::19">ALARMTYPE ::= MORE | MOREEQ | EQ | LESS | LESSEQ</zed-box></textItem
+><textItem history="26" location="gui::14"><schema-box location="gui::14">ALARMREC<decl-part/> trigger_val: ALARMTYPE &cross; VALTYPE &cross; FLOAT</schema-box></textItem
+><textItem history="27" location="gui::15"><schema-box location="gui::15">ALARMDATA<decl-part/> STOCKS
+alarms: STOCKREC &rarrb; &Popf; ALARMREC<ax-part/> <word style="roman"/>dom<word/> alarms &subeq; stock_ids</schema-box></textItem
+><textItem history="28" location="gui::21"><zed-box location="gui::21">TRANSTYPE ::= BUY | SELL</zed-box></textItem
+><textItem history="29" location="gui::22"><schema-box location="gui::22">TRANSACTIONREC<decl-part/> trans_date: DATE
+trans_price, trans_fee, profit, buy_price: FLOAT
+trans_amount: &Nopf;
+mod_date : DATE
+mod_time : TIME</schema-box></textItem
+><textItem history="30" location="gui::23"><schema-box location="gui::23">TRANSDATA<decl-part/> STOCKS
+transactions: STOCKREC &rarrb; &Popf; (TRANSTYPE &cross;TRANSACTIONREC)<ax-part/> <word style="roman"/>dom<word/> transactions &subeq; stock_ids</schema-box></textItem
+><textItem history="31" location="gui::11"><schema-box location="gui::11">PORTFOLIOREC<decl-part/> portfolio_name: CHARS</schema-box></textItem
+><textItem history="32" location="gui::38"><zed-box location="gui::38">PORTFOLIO &eqhat; PORTFOLIOREC &wedge; STOCKDATA &wedge; ALARMDATA &wedge; TRANSDATA</zed-box></textItem
+><textItem history="33" location="gui::40"><theorem-def location="gui::40">stan_poczatkowy<ax-part/>   true</theorem-def></textItem
+><textItem history="34" location="gui::41"><zed-box location="gui::41">CurrenciesInit &eqhat; [ CURRENCYDATA' | currencies' = {usd_currency} ]</zed-box></textItem
+><textItem history="35" location="gui::42"><zed-box location="gui::42">StockDataInit &eqhat;
+[STOCKDATA'
+| stock_ids' = &empty; &wedge; sessions' = &empty; &wedge; daily_data' = &empty; &wedge; intra_data' = &empty;]</zed-box></textItem
+><textItem history="36" location="gui::43"><zed-box location="gui::43">AlarmDataInit &eqhat; [ ALARMDATA' | alarms' = &empty; ]</zed-box></textItem
+><textItem history="37" location="gui::44"><zed-box location="gui::44">TransDataInit &eqhat; [ TRANSDATA' | transactions' = &empty; ]</zed-box></textItem
+><textItem history="38" location="gui::45"><zed-box location="gui::45">PortfolioRecInit &eqhat; [PORTFOLIOREC' | portfolio_name' = &lang;&rang;]</zed-box></textItem
+><textItem history="39" location="gui::46"><zed-box location="gui::46">PortfolioInit &eqhat; CurrenciesInit &wedge; StockDataInit &wedge; AlarmDataInit &wedge; TransDataInit &wedge; PortfolioRecInit</zed-box></textItem
+><textItem history="40" location="gui::47"><theorem-def location="gui::47">PortfolioInitPossible<ax-part/> &exists;PORTFOLIO' &bullet; PortfolioInit</theorem-def></textItem
+><textItem history="41" location="gui::50"><theorem-def location="gui::50">CurrencyOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="42" location="gui::51"><schema-box location="gui::51">AddCurrency<decl-part/> &Delta;PORTFOLIO
+isocode?: CHARS
+usdratio?: FLOAT<ax-part/> &not; (&exists;x: CURRENCY &bullet; x . iso_code = isocode?)
+currencies'
+  = currencies &cup; {&theta; CURRENCY[iso_code := &lang;&rang;, usd_ratio := usdratio?]}</schema-box></textItem
+><textItem history="43" location="gui::54"><schema-box location="gui::54">FindCurrency<decl-part/> &Xi;PORTFOLIO
+isocode?: CHARS
+out!: CURRENCY<ax-part/> &exists;&sub1;x: currencies &bullet; x . iso_code = isocode?
+out! = (&mu;x: currencies | x . iso_code = isocode?)</schema-box></textItem
+><textItem history="44" location="gui::55"><zed-box location="gui::55">GetRatio &eqhat; [currency?: CURRENCY; ratio!: FLOAT | ratio! = currency? . usd_ratio ]</zed-box></textItem
+><textItem history="45" location="gui::53"><zed-box location="gui::53">GetCurrencyRatio &eqhat; FindCurrency &gtgt; GetRatio [ out! / currency? ] </zed-box></textItem
+><textItem history="46" location="gui::57"><schema-box location="gui::57">DeleteCurrencyBindings<decl-part/> &Delta;PORTFOLIO
+currency?: CURRENCY<ax-part/> currency? &isin; currencies
+&forall;x: stock_ids &bullet; x . currency &neq; currency?
+currencies' = currencies \ {currency?}</schema-box></textItem
+><textItem history="47" location="gui::58"><zed-box location="gui::58">DeleteCurrency &eqhat; FindCurrency &gtgt; DeleteCurrencyBindings [out! / currency? ]</zed-box></textItem
+><textItem history="48" location="gui::62"><theorem-def location="gui::62">StockPointsOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="49" location="gui::65"><schema-box location="gui::65">AddDailyData<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC
+session?: SESSIONREC
+vals?: VALUES<ax-part/> stock? &isin; stock_ids
+stock? &notin; <word style="roman"/>dom<word/> daily_data
+sessions' = sessions &cup; {session?}
+daily_data' = daily_data &oplus; {(stock? &rtarr; {(session? &rtarr; vals?)})}</schema-box></textItem
+><textItem history="50" location="gui::63"><schema-box location="gui::63">UpdateDailyData<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC
+session?: SESSIONREC
+vals?: VALUES<ax-part/> stock? &isin; stock_ids
+stock? &isin; <word style="roman"/>dom<word/> daily_data
+sessions' = sessions &cup; {session?}
+daily_data'
+  = daily_data &oplus; {(stock? &rtarr; daily_data stock? &cup; {(session? &rtarr; vals?)})}</schema-box></textItem
+><textItem history="51" location="gui::66"><zed-box location="gui::66">AddDailyPoint &eqhat; AddDailyData &vee; UpdateDailyData</zed-box></textItem
+><textItem history="52" location="gui::67"><schema-box location="gui::67">AddIntradayData<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC
+session?: SESSIONREC
+time?: TIME
+vals?: VALUES<ax-part/> stock? &isin; stock_ids
+stock? &notin; <word style="roman"/>dom<word/> intra_data
+sessions' = sessions &cup; {session?}
+intra_data' = intra_data &oplus; {(stock? &rtarr; {(session? &rtarr; (time? &rtarr; vals?))})}</schema-box></textItem
+><textItem history="53" location="gui::68"><schema-box location="gui::68">UpdateIntradayData<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC
+session?: SESSIONREC
+time?: TIME
+vals?: VALUES<ax-part/> stock? &isin; stock_ids
+stock? &isin; <word style="roman"/>dom<word/> intra_data
+sessions' = sessions &cup; {session?}
+intra_data' = intra_data &oplus; {(stock? &rtarr; intra_data stock? &cup; {(session? &rtarr; (time? &rtarr; vals?))})}</schema-box></textItem
+><textItem history="54" location="gui::69"><zed-box location="gui::69">AddIntradayPoint &eqhat; AddIntradayData &vee; UpdateIntradayData</zed-box></textItem
+><textItem history="55" location="gui::70"><schema-box location="gui::70">DeletePointsForStock<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC<ax-part/> daily_data' = {stock?} &vltrib; daily_data
+intra_data' = {stock?} &vltrib; intra_data</schema-box></textItem
+><textItem history="56" location="gui::71"><schema-box location="gui::71">GetDailyValues<decl-part/> &Xi;PORTFOLIO
+stock?: STOCKREC
+session?: SESSIONREC
+vals!: VALUES<ax-part/> stock? &isin; <word style="roman"/>dom<word/> daily_data
+session? &isin; <word style="roman"/>dom<word/> (daily_data stock?)
+(daily_data stock?, session?) &isin; applies$to
+daily_data stock? session? &isin; VALUES
+vals! = (&mu;x: VALUES | x = daily_data stock? session?)</schema-box></textItem
+><textItem history="57" location="gui::74"><schema-box location="gui::74">FindSession<decl-part/> &Xi;PORTFOLIO
+date?: DATE
+out!: SESSIONREC<ax-part/> &exists;&sub1;x: sessions &bullet; x . session_date = date?
+out! = (&mu;x: sessions | x . session_date = date?)</schema-box></textItem
+><textItem history="58" location="gui::75"><zed-box location="gui::75">GetDailyValuesByDate &eqhat; FindSession &gtgt; GetDailyValues [ out! / session? ]</zed-box></textItem
+><textItem history="59" location="gui::76"><theorem-def location="gui::76">AlarmOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="60" location="gui::77"><axiomatic-box location="gui::77"><decl-part/>active_alarm_values: &Popf; (ALARMREC &cross; VALUES)</axiomatic-box></textItem
+><textItem history="61" location="gui::78"><schema-box location="gui::78">AddAlarmData<decl-part/> &Delta;PORTFOLIO
+alarm?: ALARMREC
+stock?: STOCKREC<ax-part/> stock? &isin; stock_ids
+stock? &notin; <word style="roman"/>dom<word/> alarms
+alarms' = alarms &oplus; {(stock? &rtarr; {alarm?})}</schema-box></textItem
+><textItem history="62" location="gui::79"><schema-box location="gui::79">UpdateAlarmData<decl-part/> &Delta;PORTFOLIO
+alarm?: ALARMREC
+stock?: STOCKREC<ax-part/> stock? &isin; stock_ids
+stock? &isin; <word style="roman"/>dom<word/> alarms
+alarms' = alarms &oplus; {(stock? &rtarr; alarms stock? &cup; {alarm?})}</schema-box></textItem
+><textItem history="63" location="gui::80"><zed-box location="gui::80">AddAlarm &eqhat; AddAlarmData &vee; UpdateAlarmData</zed-box></textItem
+><textItem history="64" location="gui::81"><schema-box location="gui::81">IsStockActiveForVals<decl-part/> &Xi;PORTFOLIO
+stock?: STOCKREC
+vals?: VALUES<ax-part/> &exists;arec: ALARMREC
+   &bullet; stock? &isin; <word style="roman"/>dom<word/> alarms &wedge; arec &isin; alarms stock? &rArr; arec &rtarr; vals? &isin; active_alarm_values</schema-box></textItem
+><textItem history="65" location="gui::83"><zed-box location="gui::83">IsStockActive &eqhat; GetDailyValues &gtgt; IsStockActiveForVals [ vals! / vals? ]</zed-box></textItem
+><textItem history="66" location="gui::84"><schema-box location="gui::84">DeleteAlarmsForStock<decl-part/> &Delta;PORTFOLIO
+stock?: STOCKREC<ax-part/> alarms' = {stock?} &vltrib; alarms</schema-box></textItem
+><textItem history="67" location="gui::85"><theorem-def location="gui::85">TransactionOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="68" location="gui::99"><schema-box location="gui::99">MarkTransactionTimestamp<decl-part/> &Delta;TRANSACTIONREC<ax-part/> mod_date' = today
+mod_time' = now</schema-box></textItem
+><textItem history="69" location="gui::96"><schema-box location="gui::96">DoTransaction<decl-part/>  &Delta;PORTFOLIO
+stock?: STOCKREC
+record?: TRANSACTIONREC
+type?: TRANSTYPE
+merged: &Popf; (TRANSTYPE &cross; TRANSACTIONREC)<ax-part/>  <word style="bold"/>if<word/> stock? &isin; <word style="roman"/>dom<word/> transactions
+<word style="bold"/>then<word/> merged = transactions stock? &cup; {(type? &rtarr; record? )}
+<word style="bold"/>else<word/> merged = {type? &rtarr; record?}
+transactions' = transactions &oplus; {(stock? &rtarr; merged)}</schema-box></textItem
+><textItem history="70" location="gui::97"><zed-box location="gui::97">Buy &eqhat; MarkTransactionTimestamp &fatsemi; DoTransaction[type? := BUY]</zed-box></textItem
+><textItem history="71" location="gui::98"><zed-box location="gui::98">Sell &eqhat; MarkTransactionTimestamp &fatsemi; DoTransaction[type? := SELL]</zed-box></textItem
+><textItem history="72" location="gui::95"><schema-box location="gui::95">DeleteTransactionsForStock<decl-part/>  &Delta;PORTFOLIO
+stock?: STOCKREC<ax-part/>  transactions' = {stock?} &vltrib; transactions</schema-box></textItem
+><textItem history="73" location="gui::86"><theorem-def location="gui::86">StockOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="74" location="gui::88"><schema-box location="gui::88">AddStock<decl-part/> &Delta;PORTFOLIO
+myname?, mysymbol?: CHARS<ax-part/>
+stock_ids' = stock_ids &cup; {STOCKREC[name := myname?, symbol := mysymbol?,
+               currency := usd_currency, source_id := default_source,
+               mod_date := 0, mod_time := 0]}</schema-box></textItem
+><textItem history="75" location="gui::92"><schema-box location="gui::92">DeleteStockData<decl-part/>&Delta;PORTFOLIO
+stock? : STOCKREC<ax-part/> stock_ids' = stock_ids \ { stock? }</schema-box></textItem
+><textItem history="76" location="gui::93"><zed-box location="gui::93">DeleteStock &eqhat; DeleteStockData &wedge; DeletePointsForStock &wedge; DeleteAlarmsForStock &wedge; DeleteTransactionsForStock</zed-box></textItem
+><textItem history="77" location="gui::87"><theorem-def location="gui::87">PortfolioOperations<ax-part/>   true</theorem-def></textItem
+><textItem history="78" location="gui::94"><schema-box location="gui::94">SetStockName<decl-part/> &Delta;PORTFOLIO
+newname? : CHARS<ax-part/>portfolio_name' = newname?</schema-box></textItem
+><script name="StockOperations"></script
+><script name="good_check_alarm"><scriptItem><ztext>apply domDefinition to expression <word style="roman"/>dom<word/> check_alarm</ztext><provercmd name="apply-to-expression"><name kind="expr" ident="domDefinition"></name><application><name kind="expr" ident="dom" style="roman"></name><name kind="expr" ident="check_alarm"></name></application></provercmd></scriptItem
+><scriptItem><ztext>prenex</ztext></scriptItem
+><scriptItem><ztext>rearrange</ztext></scriptItem
+><scriptItem><ztext>equality substitute</ztext></scriptItem
+></script
+><script name="UpdateAlarmData$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="t"><scriptItem><ztext>prove</ztext><provercmd name="prove-by-rewrite"></provercmd></scriptItem
+></script
+><script name="x"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="test"><scriptItem><ztext>prove by reduce</ztext></scriptItem
+></script
+><script name="PortfolioInitPossible"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="IsStockActiveForVals$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="GetDailyValues$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="PortfolioOperations"></script
+><script name="DoTransaction$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="StockPointsOperations"></script
+><script name="CurrencyOperations"></script
+><script name="TransactionOperations"></script
+><script name="x2"><scriptItem><ztext>prove by reduce</ztext></scriptItem
+><scriptItem><ztext>invoke STOCKTYPE</ztext></scriptItem
+><scriptItem><ztext>apply STOCKTYPE$member to predicate x &isin; STOCKTYPE</ztext><provercmd name="apply-to-predicate"><name kind="expr" ident="STOCKTYPE$member"></name><relchain><name kind="expr" ident="x"></name><name class="other" kind="expr" ident="&isin;"></name><name kind="expr" ident="STOCKTYPE"></name></relchain></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="Deklaracje"></script
+><script name="ValidDelete"><scriptItem><ztext>with predicate (&exists;FindCurrency &bullet; &theta; PORTFOLIO' = &theta; PORTFOLIO'' )reduce</ztext><provercmd name="with-predicate"><binder kind="pred" type="forsome"><decpart><schname kind="schema" ident="FindCurrency"></schname></decpart><relchain><op kind="expr" type="preop"><name class="other" kind="expr" ident="&theta;"></name><schname kind="schema" ident="PORTFOLIO" decoration="'"></schname></op><name class="inrel" kind="expr" ident="="></name><op kind="expr" type="preop"><name class="other" kind="expr" ident="&theta;"></name><schname kind="schema" ident="PORTFOLIO" decoration="''"></schname></op></relchain></binder><provercmd name="reduce"></provercmd></provercmd></scriptItem
+><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+><scriptItem><ztext>prenex</ztext><provercmd name="prenex"></provercmd></scriptItem
+><scriptItem><ztext>rewrite</ztext></scriptItem
+><scriptItem><ztext>simplify</ztext></scriptItem
+><scriptItem><ztext>trivial rewrite</ztext></scriptItem
+><scriptItem><ztext>reduce</ztext><provercmd name="reduce"></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="FindSession$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="UpdateIntradayData$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="StockData$domainCheck"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="FindCurrency2$domainCheck"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+><scriptItem><ztext>apply domDefinition to expression <word style="roman"/>dom<word/> <word style="bold"/>local<word/> FindCurrency2</ztext><provercmd name="apply-to-expression"><name kind="expr" ident="domDefinition"></name><application><name kind="expr" ident="dom" style="roman"></name><name kind="expr" ident="FindCurrency2" scope="local"></name></application></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="TransBuy$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="UpdateDailyData$domainCheck"><scriptItem><ztext>rewrite</ztext><provercmd name="rewrite"></provercmd></scriptItem
+></script
+><script name="AddDailyPoint$domainCheck"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="StockIsDailyOrIntraday"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+><scriptItem><ztext>apply STOCKTYPE$member to predicate x &isin; STOCKTYPE</ztext><provercmd name="apply-to-predicate"><name kind="expr" ident="STOCKTYPE$member"></name><relchain><name kind="expr" ident="x"></name><name class="other" kind="expr" ident="&isin;"></name><name kind="expr" ident="STOCKTYPE"></name></relchain></provercmd></scriptItem
+><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+><script name="deklaracje"><scriptItem><ztext>prove</ztext></scriptItem
+></script
+><script name="AlarmOperations"></script
+><script name="stan_poczatkowy"></script
+><script name="FindCurrency$domainCheck"><scriptItem><ztext>prove by reduce</ztext><provercmd name="prove-by-reduce"></provercmd></scriptItem
+></script
+></Z-EVES-GUI-State>

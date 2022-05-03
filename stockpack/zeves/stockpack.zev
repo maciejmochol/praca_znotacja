@@ -1,0 +1,40 @@
+<Z-EVES-GUI-State version="1" index="24"><textItem history="2" location="gui::5"><zed-box location="gui::5">CHARS == <word style="roman"/>seq<word/> &Nopf;</zed-box></textItem
+><textItem history="3" location="gui::13"><zed-box location="gui::13">FLOAT == &Nopf;</zed-box></textItem
+><textItem history="4" location="gui::6"><zed-box location="gui::6">DATE == &Nopf;</zed-box></textItem
+><textItem history="5" location="gui::7"><zed-box location="gui::7">TIME == &Nopf;</zed-box></textItem
+><textItem history="6" location="gui::24"><zed-box location="gui::24">[SOURCE]</zed-box></textItem
+><textItem history="7" location="gui::1"><schema-box location="gui::1">Header<decl-part/> creating_date, updating_date: DATE
+host_id: &Nopf;
+sync_source: SOURCE</schema-box></textItem
+><textItem history="8" location="gui::2"><schema-box location="gui::2">SessionRec<decl-part/> session_date: DATE</schema-box></textItem
+><textItem history="9" location="gui::3"><schema-box location="gui::3">Sessions<decl-part/>sessions : <word style="roman"/>iseq<word/> SessionRec</schema-box></textItem
+><textItem history="10" location="gui::4"><schema-box location="gui::4">StockRec<decl-part/> name, symbol: CHARS
+portfolio: &Nopf;
+currency: &Nopf;
+source_id: SOURCE
+mod_date: DATE
+mod_time: TIME</schema-box></textItem
+><textItem history="11" location="gui::8"><schema-box location="gui::8">Stocks<decl-part/> stocks: <word style="roman"/>iseq<word/> StockRec</schema-box></textItem
+><textItem history="12" location="gui::16"><axiomatic-box location="gui::16"><decl-part/>OPEN, CLOSE, MAX, MIN, VOL : &Nopf;<ax-part/> OPEN = 1 &wedge; CLOSE = 2 &wedge; MAX = 3 &wedge; MIN = 4 &wedge; VOL = 5</axiomatic-box></textItem
+><textItem history="13" location="gui::17"><zed-box location="gui::17">VALTYPE == { OPEN, CLOSE, MAX, MIN, VOL }</zed-box></textItem
+><textItem history="14" location="gui::9"><schema-box location="gui::9">StockDataRec<decl-part/> stock_daily_date: DATE
+value: &Popf; (VALTYPE &rarr; FLOAT)</schema-box></textItem
+><textItem history="15" location="gui::10"><schema-box location="gui::10">StockData<decl-part/> stock: &Nopf;
+stock_daily_datas, stock_intraday_datas : <word style="roman"/>iseq<word/> StockDataRec</schema-box></textItem
+><textItem history="16" location="gui::11"><schema-box location="gui::11">Portfolio<decl-part/>portfolio_name : CHARS</schema-box></textItem
+><textItem history="17" location="gui::12"><schema-box location="gui::12">Currency<decl-part/>iso_code : CHARS
+usd_ratio : FLOAT</schema-box></textItem
+><textItem history="18" location="gui::18"><axiomatic-box location="gui::18"><decl-part/>MORE, MOREEQ, EQ, LESS, LESSEQ : &Nopf;<ax-part/> MORE = 1 &wedge; MOREEQ = 2 &wedge; EQ = 3 &wedge; LESS = 4 &wedge; LESSEQ = 5</axiomatic-box></textItem
+><textItem history="19" location="gui::19"><zed-box location="gui::19">ALARMTYPE == { MORE,  MOREEQ, EQ, LESS, LESSEQ }</zed-box></textItem
+><textItem history="20" location="gui::14"><schema-box location="gui::14">AlarmRec<decl-part/> stock_id: &Nopf;
+trigger_val: ALARMTYPE &rarr; VALTYPE &rarr; FLOAT</schema-box></textItem
+><textItem history="21" location="gui::15"><zed-box location="gui::15">Alarms &eqhat; [ alarms : <word style="roman"/>iseq<word/> AlarmRec ]</zed-box></textItem
+><textItem history="22" location="gui::20"><axiomatic-box location="gui::20"><decl-part/>BUY, SELL, BUYORSELL : &Nopf;<ax-part/>  BUY = 1 &wedge; SELL = 2 &wedge; BUYORSELL = 3</axiomatic-box></textItem
+><textItem history="23" location="gui::21"><zed-box location="gui::21">TRANSTYPE == { BUY, SELL, BUYORSELL }</zed-box></textItem
+><textItem history="24" location="gui::22"><schema-box location="gui::22">TransactionRec<decl-part/>stock_id : &Nopf;
+trans_date : DATE
+trans_price, trans_fee, profit, buy_price : FLOAT
+trans_amount : &Nopf;
+trans_type : TRANSTYPE</schema-box></textItem
+><textItem history="25" location="gui::23"><zed-box location="gui::23">Transactions &eqhat; [ transactions : &Popf; TransactionRec ]</zed-box></textItem
+></Z-EVES-GUI-State>

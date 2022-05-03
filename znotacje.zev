@@ -1,0 +1,85 @@
+<Z-EVES-GUI-State version="1" index="1"><textItem history="2" location="/home/code/praca/praca_magisterska.tex:26"><zed-box> [ZNAK] </zed-box></textItem
+><textItem history="3" location="/home/code/praca/praca_magisterska.tex:27"><axiomatic-box><decl-part/> pusty: &Popf;ZNAK </axiomatic-box></textItem
+><textItem history="4" location="/home/code/praca/praca_magisterska.tex:28"><zed-box>         TEKST == <word style="roman"/>seq<word/> ZNAK </zed-box></textItem
+><textItem history="5" location="/home/code/praca/praca_magisterska.tex:29"><zed-box>	ODSTEP == <word style="roman"/>seq<word/> &sub1; pusty 
+</zed-box></textItem
+><textItem history="6" location="/home/code/praca/praca_magisterska.tex:30"><zed-box>	SLOWO == <word style="roman"/>seq<word/> &sub1; (ZNAK \pusty) </zed-box></textItem
+><textItem history="7" location="/home/code/praca/praca_magisterska.tex:32"><axiomatic-box location="/home/code/praca/praca_magisterska.tex:32"><decl-part/>         slowa: TEKST &rarr;<word style="roman"/>seq<word/> SLOWO <ax-part/>         &forall;o: ODSTEP; s: SLOWO; l,p, w : TEKST  &bullet; 
+ 		slowa  &lang;&rang;= &lang;&rang;&wedge;
+ 		slowa  o = &lang;&rang;&wedge;
+ 		slowa  s = &lang; w &rang;&wedge;
+ 		slowa (o &frown;p) = slowa p &wedge;
+ 		slowa (l &frown;o) = slowa l &wedge;
+ 		slowa (l &frown;o &frown;p) = (slowa l) &frown;(slowa p) </axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:31"><zed-box location="/home/code/praca/praca_magisterska.tex:31">slowa &lang; A, l, a, m, a, k, o, t, k, a &rang;= &lang; &lang; A, l, a &rang;, &lang; m, a &rang;, &lang; k, o, t, k, a &rang; &rang;</zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:33"><axiomatic-box><decl-part/>         linie: TEKST &rarr;<word style="roman"/>seq<word/> LINIA <ax-part/>	dots mbox definicja pominiêta dots </axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:34"><axiomatic-box><decl-part/> 	wc: TEKST &rarr;(&Nopf;&cross;&Nopf;&cross;&Nopf;) <ax-part/>	&forall;plik: TEKST &bullet; 
+ 		wc plik = (#(linie plik), #(slowa plik), #plik) </axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:35"><zed-box>    wc == (&lambda;plik: TEKST &bullet; (#(linie plik), #(slowa plik), #plik)) </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:36"><axiomatic-box><decl-part/> szerokosc: &Nopf;</axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:37"><schema-box>Format<decl-part/> 	t,t': TEKST <ax-part/>	slowa t' = slowa t 
+	&forall;l: <word style="roman"/>ran<word/>  (linie t') &bullet; #l &leq;szerokosc </schema-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:38"><schema-box>Wypelnienie<decl-part/> 	Format <ax-part/>	#(linie t') = min  {t': TEKST | Format &bullet; #(linie t') }</schema-box></textItem
+><textItem history="8" location="/home/code/praca/praca_magisterska.tex:39"><zed-box> [OSOBA, SAMOCHOD, PRZEGLAD] </zed-box></textItem
+><textItem history="9" location="/home/code/praca/praca_magisterska.tex:40"><axiomatic-box location="/home/code/praca/praca_magisterska.tex:40"><decl-part/>pozwolenie: SAMOCHOD &lrarr; OSOBA</axiomatic-box></textItem
+><textItem history="10" location="/home/code/praca/praca_magisterska.tex:41"><axiomatic-box><decl-part/> 	sprawnosc: SAMOCHOD &lrarr;PRZEGLAD </axiomatic-box></textItem
+><textItem history="11" location="/home/code/praca/praca_magisterska.tex:42"><schema-box location="/home/code/praca/praca_magisterska.tex:42">Rejestr<decl-part/> zarejestrowany: SAMOCHOD &rarrb; OSOBA<ax-part/> zarejestrowany &subeq; pozwolenie</schema-box></textItem
+><textItem history="12" location="/home/code/praca/praca_magisterska.tex:43"><schema-box>Przeglady<decl-part/> 	zatwierdzony: SAMOCHOD &rarrb;PRZEGLAD <ax-part/>	zatwierdzony &subeq;sprawnosc </schema-box></textItem
+><textItem history="13" location="/home/code/praca/praca_magisterska.tex:44"><schema-box location="/home/code/praca/praca_magisterska.tex:44">Zarejestruj<decl-part/> &Delta;Rejestr
+&Xi;Przeglady
+o?: OSOBA
+s?: SAMOCHOD<ax-part/> s? &notin; <word style="roman"/>dom<word/> zarejestrowany
+s? &isin; <word style="roman"/>dom<word/> zatwierdzony
+(s?, o?) &notin; pozwolenie
+zarejestrowany' = zarejestrowany &cup; {(s?, o?)}</schema-box></textItem
+><textItem history="14" location="/home/code/praca/praca_magisterska.tex:45"><schema-box location="/home/code/praca/praca_magisterska.tex:45">Wyrejestruj<decl-part/>  	&Delta;Rejestr 
+	o?: OSOBA 
+	s?: SAMOCHOD <ax-part/> 	s? &isin;<word style="roman"/>dom<word/> zarejestrowany 
+	zarejestrowany' = zarejestrowany \{(s?, o?)}</schema-box></textItem
+><textItem history="15" location="/home/code/praca/praca_magisterska.tex:46"><zed-box> Dopuszczony &eqhat;[  &Xi;Rejestr; s?: SAMOCHOD | s? &isin;<word style="roman"/>dom<word/> zarejestrowany  ] </zed-box></textItem
+><textItem history="16" location="/home/code/praca/praca_magisterska.tex:47"><schema-box location="/home/code/praca/praca_magisterska.tex:47">Nieupowazniony<decl-part/>  	&Xi;Rejestr 
+	o?: OSOBA 
+ 	s?: SAMOCHOD <ax-part/> 	(s?,o?) &notin;pozwolenie </schema-box></textItem
+><textItem history="17" location="/home/code/praca/praca_magisterska.tex:48"><zed-box location="/home/code/praca/praca_magisterska.tex:48">Niesprawdzony &eqhat;[  &Xi;Rejestr; &Xi;Przeglady; s?: SAMOCHOD | s? &isin;<word style="roman"/>dom<word/> zatwierdzony  ] </zed-box></textItem
+><textItem history="18" location="/home/code/praca/praca_magisterska.tex:49"><zed-box> 	T_Zarejestruj &eqhat;Zarejestruj &vee;Dopuszczony &vee;Nieupowazniony &vee;Niesprawdzony </zed-box></textItem
+><textItem history="19" location="/home/code/praca/praca_magisterska.tex:50"><zed-box> [WEZLY, KOMUNIKATY] </zed-box></textItem
+><textItem history="20" location="/home/code/praca/praca_magisterska.tex:51"><axiomatic-box location="/home/code/praca/praca_magisterska.tex:51"><decl-part/> makswezlow: &Nopf;</axiomatic-box></textItem
+><textItem history="21" location="/home/code/praca/praca_magisterska.tex:52"><axiomatic-box><decl-part/> 	siec: WEZLY &rarrtl;&Nopf;</axiomatic-box></textItem
+><textItem history="22" location="/home/code/praca/praca_magisterska.tex:53"><axiomatic-box><decl-part/> 	bufor: WEZLY &rarr;<word style="roman"/>seq<word/> KOMUNIKATY </axiomatic-box></textItem
+><textItem history="23" location="/home/code/praca/praca_magisterska.tex:54"><axiomatic-box location="/home/code/praca/praca_magisterska.tex:54"><decl-part/> 	PAKIETY : <word style="roman"/>ran<word/> siec &cross;KOMUNIKATY </axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:55"><axiomatic-box location="/home/code/praca/praca_magisterska.tex:55"><decl-part/> 	adres: WEZLY &rarr;&Nopf;<ax-part/>     	&forall;w: WEZLY &bullet;  		
+	(&exists;l &isin;siec &wedge;first l = w &hArr;adres(w) = second l)  &wedge; (w &notin;<word style="roman"/>dom<word/> siec &hArr;adres(w) = 0) </axiomatic-box></textItem
+><textItem history="24" location="gui::1"><axiomatic-box location="gui::1"><decl-part/> SEND : &Nopf;
+ RECEIVE : &Nopf;<ax-part/>SEND = 0
+ RECEIVE = 0</axiomatic-box></textItem
+><textItem history="25" location="/home/code/praca/praca_magisterska.tex:56"><axiomatic-box><decl-part/> 	ACK: KOMUNIKATY &rarr;KOMUNIKATY </axiomatic-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:57"><schema-box location="/home/code/praca/praca_magisterska.tex:57">System<decl-part/>       	nadrzedny, podrzedne: &Popf;siec 
+	kolejki: <word style="roman"/>seq<word/> (<word style="roman"/>seq<word/> KOMUNIKATY) 	
+	state: {SEND, RECEIVE}<ax-part/>      	#nadrzedny = 1 	
+	#podrzedne &isin; {1 ..makswezlow-1}	
+	#kolejki = #nadrzedny + #podrzedne </schema-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:58"><schema-box>TransmitNtoP?? bad subscript ??uccess<decl-part/> 	&Delta;System 
+	p?: PAKIETY 
+<ax-part/>	&forall;wp &isin;podrzedne; n: nadrzedny &bullet;  		adres(wp) = first p &rArr;(bufor(w') = bufor(w) &frown;second p &wedge;
+ 			bufor(n') = bufor(n) &frown;ACK(second p)) </schema-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:59"><schema-box>TransmitNtoP?? bad subscript ??ailReceive<decl-part/> 	&Delta;System 
+	p?: PAKIETY 
+<ax-part/>	&forall;wp &isin;podrzedne; n: nadrzedny &bullet;  		adres(wp) = first p &rArr;(bufor(w') = bufor(w) &frown;second p &wedge;
+ 			bufor(n') = bufor(n)) </schema-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:60"><schema-box>TransmitNtoP?? bad subscript ??ailSend<decl-part/> 	&Xi;System 
+	p?: PAKIETY 
+<ax-part/>	&forall;wp &isin;podrzedne; n: nadrzedny &bullet;  		adres(wp) = first p &rArr;(bufor(w') = bufor(w) &wedge;bufor(n') = bufor(n) </schema-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:61"><zed-box> 	TransmitNtoP &eqhat;TransmitNtoP?? bad subscript ??uccess &vee;TransmitNtoP?? bad subscript ??ailSend &vee;TransmitNtoP?? bad subscript ??ailReceive </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:62"><zed-box> 	TransmitPtoP &eqhat;TransmitPtoP?? bad subscript ??uccess &vee;TransmitPtoP?? bad subscript ??ailSend &vee;TransmitPtoP?? bad subscript ??ailReceive </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:63"><zed-box> SendNtoP?? bad subscript ??uccess &eqhat;[  &Delta;System; p? : PAKIETY | (state = SEND) &wedge;(TransmitNtoP?? bad subscript ??uccess(p))  ] </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:64"><zed-box> SetState?? bad subscript ??END &eqhat;[  &Delta;System; state' = SEND  ] </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:65"><zed-box> SetState?? bad subscript ??ECEIVE &eqhat;[  &Delta;System; state' = RECEIVE  ] </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:66"><zed-box> SendPtoP?? bad subscript ??uccess &eqhat;[  &Delta;System; p? : PAKIETY | SetState?? bad subscript ??END &wedge;
+ 	(TransmitNtoP(pakiet startu)) &wedge;SetState?? bad subscript ??ECEIVE &wedge;
+ 	(TransmitPtoP?? bad subscript ??uccess(p)) &wedge;SetState?? bad subscript ??END  ] </zed-box></textItem
+><textItem location="/home/code/praca/praca_magisterska.tex:67"><zed-box> SendPtoN?? bad subscript ??uccess &eqhat;[  &Delta;System; p? : PAKIETY | SetState?? bad subscript ??END &wedge;
+ 	(TransmitNtoP(pakiet startu)) &wedge;SetState?? bad subscript ??ECEIVE &wedge;
+ 	(TransmitPtoN?? bad subscript ??uccess(p)) &wedge;SetState?? bad subscript ??END  ] </zed-box></textItem
+><script name="slowa$domainCheck"><scriptItem number="2"><ztext>prove by reduce</ztext></scriptItem
+></script
+></Z-EVES-GUI-State>

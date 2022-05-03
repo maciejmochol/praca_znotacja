@@ -1,0 +1,220 @@
+{\rtf\ansi{\fonttbl
+{\f0\froman Times New Roman;}
+{\f1\ftech Symbol;}
+{\f2\fnil \fprq2 \fcharset2 Zed;}}
+\plain \keep 
+\par {\f0 \b theorem }{\f0 \i deklaracje\line
+  true
+}\line
+\par {\f0 \b incomplete proof of }{\f0 \i deklaracje\line
+  prove
+}\line
+\par {\f0 \i CHARS}{\f2  ==}{\f0 \i  }{\f0 seq}{\f0 \i  }{\f2 N}{\f0 \i 
+}\line
+\par {\f0 \i FLOAT}{\f2  ==}{\f0 \i  }{\f2 Z}{\f0 \i 
+}\line
+\par {\f0 \i DATE}{\f2  ==}{\f0 \i  }{\f2 N}{\f0 \i 
+}\line
+\par {\f0 \i TIME}{\f2  ==}{\f0 \i  }{\f2 N}{\f0 \i 
+}\line
+\par {\f0 [}{\f0 \i SOURCE}{\f0 ]
+}\line
+\par {\f2 \'c8_}{\f0 \i HEADER }{\f2 ___________________________________\line
+\'ae}{\f0 \i creating_date, updating_date: DATE\line
+}{\f2 \'ae}{\f0 \i host_id: }{\f2 N}{\f0 \i \line
+}{\f2 \'ae}{\f0 \i sync_source: SOURCE\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i SESSIONREC }{\f2 _________________________________\line
+\'ae}{\f0 \i session_date: DATE\line
+}{\f2 \'ae}{\f0 \i session_number: }{\f2 N}{\f0 \i \line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i SESSIONS}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i sessions: }{\f0 seq}{\f0 \i  SESSIONREC}{\f2 ]
+}\line
+\par {\f2 \'c8_}{\f0 \i CURRENCY }{\f2 __________________________________\line
+\'ae}{\f0 \i iso_code: CHARS\line
+}{\f2 \'ae}{\f0 \i usd_ratio: FLOAT\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'ae}{\f0 \i usd_currency: CURRENCY\line
+
+}
+\par {\f2 \'c8_}{\f0 \i CURRENCYDATA }{\f2 ________________________________\line
+\'ae}{\f0 \i currencies: }{\f2 P}{\f0 \i  CURRENCY\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 \i currencies }{\f2 \'eb}{\f0 \i  }{\f2 0}{\f0 \i \line
+}{\f2 \'ae}{\f0 \i usd_currency }{\f2 e}{\f0 \i  currencies\line
+}{\f2 \'aeA}{\f0 \i x, y: currencies }{\f2 \'a5 }{\f0 \i x . iso_code = y . iso_code }{\f2 \'de}{\f0 \i  x = y\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i STOCKREC }{\f2 __________________________________\line
+\'ae}{\f0 \i name, symbol: CHARS\line
+}{\f2 \'ae}{\f0 \i portfolio: }{\f2 N}{\f0 \i \line
+}{\f2 \'ae}{\f0 \i currency: CURRENCY\line
+}{\f2 \'ae}{\f0 \i source_id: SOURCE\line
+}{\f2 \'ae}{\f0 \i mod_date: DATE\line
+}{\f2 \'ae}{\f0 \i mod_time: TIME\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i STOCKS }{\f2 ___________________________________\line
+\'ae}{\f0 \i CURRENCYDATA\line
+}{\f2 \'ae}{\f0 \i stock_ids: }{\f0 seq}{\f0 \i  STOCKREC\line
+}{\f2 \'c7_______________\line
+\'aeA}{\f0 \i x: STOCKREC }{\f2 \'a5 }{\f0 \i x }{\f2 e}{\f0 \i  }{\f0 ran}{\f0 \i  stock_ids }{\f2 \'de}{\f0 \i  x . currency }{\f2 e}{\f0 \i  currencies\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i VALTYPE}{\f0  ::}{\f2 = }{\f0 \i OPEN }{\f2 | }{\f0 \i CLOSE }{\f2 | }{\f0 \i MAX }{\f2 | }{\f0 \i MIN }{\f2 | }{\f0 \i VOL
+}\line
+\par {\f0 \i STOCKTYPE}{\f0  ::}{\f2 = }{\f0 \i DAILY }{\f2 | }{\f0 \i INTRADAY
+}\line
+\par {\f2 \'c8_}{\f0 \i STOCKDAILYREC}{\f2 ________________________________\line
+\'ae}{\f0 \i stock_date: DATE\line
+}{\f2 \'ae}{\f0 \i values: VALTYPE }{\f2 f}{\f0 \i  FLOAT\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i STOCKINTRAREC}{\f2 ________________________________\line
+\'ae}{\f0 \i stock_time: TIME\line
+}{\f2 \'ae}{\f0 \i values: VALTYPE }{\f2 f}{\f0 \i  FLOAT\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i STOCKDAILYPOINTS}{\f2  ==}{\f0 \i  SESSIONS }{\f2 \'a7}{\f0 \i  STOCKDAILYREC
+}\line
+\par {\f0 \i STOCKINTRAPOINTS}{\f2  ==}{\f0 \i  SESSIONS }{\f2 \'a7}{\f0 \i  }{\f2 P}{\f0 \i  STOCKINTRAREC
+}\line
+\par {\f2 \'c8_}{\f0 \i STOCKPOINTS}{\f2 _________________________________\line
+\'ae}{\f0 \i daily_points: STOCKTYPE }{\f2 \'a7}{\f0 \i  STOCKDAILYPOINTS\line
+}{\f2 \'ae}{\f0 \i intra_points: STOCKTYPE }{\f2 \'a7}{\f0 \i  STOCKINTRAPOINTS\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 dom}{\f0 \i  daily_points }{\f2 z}{\f0 \i  }{\f2 \{}{\f0 \i DAILY}{\f2 \}\line
+\'ae}{\f0 dom}{\f0 \i  intra_points }{\f2 z}{\f0 \i  }{\f2 \{}{\f0 \i INTRADAY}{\f2 \}\line
+\'d0_______________________________________\line
+
+}
+\par {\f0 \b theorem }{\f0 \i StockIsDailyOrIntraday\line
+  }{\f2 A}{\f0 \i STOCKPOINTS\line
+     }{\f2 \'a5 A}{\f0 \i x: }{\f0 dom}{\f0 \i  daily_points }{\f2 \fs18 U}{\f0 \i  }{\f0 dom}{\f0 \i  intra_points\line
+          }{\f2 \'a5 }{\f0 \i x }{\f2 e}{\f0 \i  STOCKTYPE }{\f2 \'de}{\f0 \i  x = DAILY }{\f2 v}{\f0 \i  x = INTRADAY
+}\line
+\par {\f0 \b incomplete proof of }{\f0 \i StockIsDailyOrIntraday\line
+  }{\f0 prove by reduce\line
+}{\f0 \i   }{\f0 apply}{\f0 \i  STOCKTYPE$member to predicate x }{\f2 e}{\f0 \i  STOCKTYPE\line
+  }{\f0 prove by reduce
+}\line
+\par {\f2 \'c8_}{\f0 \i STOCKDATA}{\f2 __________________________________\line
+\'ae}{\f0 \i STOCKS\line
+}{\f2 \'ae}{\f0 \i datas: STOCKREC }{\f2 \'a7}{\f0 \i  STOCKPOINTS\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 dom}{\f0 \i  datas }{\f2 z}{\f0 \i  }{\f0 ran}{\f0 \i  stock_ids\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i ALARMTYPE}{\f0  ::}{\f2 = }{\f0 \i MORE }{\f2 | }{\f0 \i MOREEQ }{\f2 | }{\f0 \i EQ }{\f2 | }{\f0 \i LESS }{\f2 | }{\f0 \i LESSEQ
+}\line
+\par {\f2 \'c8_}{\f0 \i ALARMREC }{\f2 __________________________________\line
+\'ae}{\f0 \i trigger_val: ALARMTYPE }{\f2 x}{\f0 \i  VALTYPE }{\f2 x}{\f0 \i  FLOAT\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i ALARMDATA}{\f2 __________________________________\line
+\'ae}{\f0 \i STOCKS\line
+}{\f2 \'ae}{\f0 \i alarms: STOCKREC }{\f2 \'a7}{\f0 \i  }{\f2 P}{\f0 \i  ALARMREC\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 dom}{\f0 \i  alarms }{\f2 z}{\f0 \i  }{\f0 ran}{\f0 \i  stock_ids\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i TRANSTYPE}{\f0  ::}{\f2 = }{\f0 \i BUY }{\f2 | }{\f0 \i SELL }{\f2 | }{\f0 \i BUYORSELL
+}\line
+\par {\f2 \'c8_}{\f0 \i TRANSACTIONREC }{\f2 _______________________________\line
+\'ae}{\f0 \i trans_date: DATE\line
+}{\f2 \'ae}{\f0 \i trans_price, trans_fee, profit, buy_price: FLOAT\line
+}{\f2 \'ae}{\f0 \i trans_amount: }{\f2 N}{\f0 \i \line
+}{\f2 \'ae}{\f0 \i trans_type: TRANSTYPE\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i TRANSDATA}{\f2 __________________________________\line
+\'ae}{\f0 \i STOCKS\line
+}{\f2 \'ae}{\f0 \i transactions: STOCKREC }{\f2 \'a7}{\f0 \i  }{\f2 P}{\f0 \i  TRANSACTIONREC\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 dom}{\f0 \i  transactions }{\f2 z}{\f0 \i  }{\f0 ran}{\f0 \i  stock_ids\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i PORTFOLIOREC }{\f2 ________________________________\line
+\'ae}{\f0 \i portfolio_name: CHARS\line
+}{\f2 \'d0_______________________________________\line
+
+}
+\par {\f0 \i PORTFOLIO}{\f2  \'ea}{\f0 \i  PORTFOLIOREC }{\f2 \'a6}{\f0 \i  STOCKDATA }{\f2 \'a6}{\f0 \i  ALARMDATA }{\f2 \'a6}{\f0 \i  TRANSDATA
+}\line
+\par {\f0 \b theorem }{\f0 \i stan_poczatkowy\line
+  true
+}\line
+\par {\f2 \'ae}{\f0 \i today: DATE\line
+
+}
+\par {\f0 \i CurrenciesInit}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i CURRENCYDATA' }{\f2 | }{\f0 \i currencies' = }{\f2 \{}{\f0 \i usd_currency}{\f2 \}]
+}\line
+\par {\f0 \i StockDataInit}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i STOCKDATA' }{\f2 | }{\f0 \i stock_ids' = }{\f2 \'e3\'f1}{\f0 \i  }{\f2 \'a6}{\f0 \i  datas' = }{\f2 0}{\f0 \i }{\f2 ]
+}\line
+\par {\f0 \i AlarmDataInit}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i ALARMDATA' }{\f2 | }{\f0 \i alarms' = }{\f2 0}{\f0 \i }{\f2 ]
+}\line
+\par {\f0 \i TransDataInit}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i TRANSDATA' }{\f2 | }{\f0 \i transactions' = }{\f2 0}{\f0 \i }{\f2 ]
+}\line
+\par {\f0 \i PortfolioRecInit}{\f2  \'ea}{\f0 \i  }{\f2 [}{\f0 \i PORTFOLIOREC' }{\f2 | }{\f0 \i portfolio_name' = }{\f2 \'e3\'f1]
+}\line
+\par {\f0 \i PortfolioInit}{\f2  \'ea\line
+}{\f0 \i   CurrenciesInit\line
+  }{\f2 \'a6}{\f0 \i  StockDataInit\line
+  }{\f2 \'a6}{\f0 \i  AlarmDataInit\line
+  }{\f2 \'a6}{\f0 \i  TransDataInit\line
+  }{\f2 \'a6}{\f0 \i  PortfolioRecInit
+}\line
+\par {\f0 \b theorem }{\f0 \i PortfolioInitPossible\line
+  }{\f2 E}{\f0 \i PORTFOLIO' }{\f2 \'a5 }{\f0 \i PortfolioInit
+}\line
+\par {\f0 \b incomplete proof of }{\f0 \i PortfolioInitPossible\line
+  }{\f0 prove by reduce
+}\line
+\par {\f0 \b theorem }{\f0 \i CurrencyOps\line
+  true
+}\line
+\par {\f2 \'c8_}{\f0 \i AddCurrency}{\f2 _________________________________\line
+\'ae}{\f0 \i }{\f1 D}{\f0 \i PORTFOLIO\line
+}{\f2 \'ae}{\f0 \i isocode?: CHARS\line
+}{\f2 \'ae}{\f0 \i usdratio?: FLOAT\line
+}{\f2 \'c7_______________\line
+\'ae}{\f0 \i }{\f2 !}{\f0 \i  }{\f2 (E}{\f0 \i x: CURRENCY }{\f2 \'a5 }{\f0 \i x . iso_code = isocode?}{\f2 )\line
+\'ae}{\f0 \i currencies'\line
+}{\f2 \'ae}{\f0 \i   = currencies }{\f2 \fs18 U}{\f0 \i  }{\f2 \{}{\f0 \i }{\f1 q}{\f0 \i  CURRENCY}{\f0 [}{\f0 \i iso_code}{\f0  := }{\f2 \'e3\'f1}{\f0 ,}{\f0 \i  usd_ratio}{\f0  := }{\f0 \i usdratio?}{\f0 ]}{\f2 \}\line
+\'d0_______________________________________\line
+
+}
+\par {\f2 \'c8_}{\f0 \i FindCurrency }{\f2 ________________________________\line
+\'ae}{\f0 \i }{\f1 X}{\f0 \i PORTFOLIO\line
+}{\f2 \'ae}{\f0 \i isocode?: CHARS\line
+}{\f2 \'ae}{\f0 \i out!: CURRENCY\line
+}{\f2 \'c7_______________\line
+\'aeE}{\f0 \sub 1}{\f0 \i x: CURRENCY }{\f2 \'a5 }{\f0 \i x . iso_code = isocode?\line
+}{\f2 \'ae}{\f0 \i out! = }{\f2 (m}{\f0 \i x: CURRENCY }{\f2 | }{\f0 \i x . iso_code = isocode?}{\f2 )\line
+\'d0_______________________________________\line
+
+}
+\par {\f0 \b proof of }{\f0 \i FindCurrency$domainCheck\line
+  }{\f0 prove by reduce
+}\line
+\par {\f0 \i GetRatio}{\f2  \'ea\line
+}{\f0 \i   }{\f2 [}{\f0 \i currency?: CURRENCY; ratio!: FLOAT }{\f2 | }{\f0 \i ratio! = currency? . usd_ratio}{\f2 ]
+}\line
+\par {\f0 \i GetCurrencyRatio}{\f2  \'ea}{\f0 \i  FindCurrency }{\f2 \'bc}{\f0 \i  GetRatio}{\f0 [}{\f0 \i out!}{\f0 /}{\f0 \i currency?}{\f0 ]
+}}
