@@ -1,6 +1,6 @@
 #
 # Makefile for generating PS from TEX file (with bibliography processing).
-# (C) 2002 Pawe³ Pa³ucha
+# (C) 2002 Pawel Palucha
 #
 # $Id: Makefile,v 1.7 2002/06/24 23:11:40 pawel Exp $
 #
